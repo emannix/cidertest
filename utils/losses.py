@@ -9,6 +9,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import time
 
+from pdb import set_trace as pb
+
 def binarize(T, nb_classes):
     T = T.cpu().numpy()
     import sklearn.preprocessing
@@ -271,6 +273,7 @@ class DisLoss(nn.Module):
         logits = torch.div(
             torch.matmul(prototypes, prototypes.T),
             self.temperature)
+        pb()
 
         logits_mask = torch.scatter(
             torch.ones_like(mask),

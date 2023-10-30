@@ -12,12 +12,19 @@ import torch.nn.functional as F
 from torchvision import datasets, transforms
 import torchvision.transforms as transforms
 
+import random
+
 class TwoCropTransform:
     """Create two crops of the same image"""
     def __init__(self, transform):
         self.transform = transform
 
     def __call__(self, x):
+        static_seed = 1
+        if static_seed is not None:
+            torch.manual_seed(static_seed)
+            np.random.seed(static_seed)
+            random.seed(static_seed)
         return [self.transform(x), self.transform(x)]
 
 
@@ -77,7 +84,8 @@ def warmup_learning_rate(args, epoch, batch_id, total_batches, optimizer):
         lr = args.warmup_from + p * (args.warmup_to - args.warmup_from)
 
         for param_group in optimizer.param_groups:
-            param_group['lr'] = lr
+            # param_group['lr'] = lr
+            param_group['lr'] = 0.1
 
 
 def set_optimizer(opt, model):
@@ -121,10 +129,15 @@ def set_loader_small(args, eval = False, batch_size = None):
                 dataset = torch.utils.data.Subset(dataset , np.random.choice(len(dataset), 20000, replace=False))
             train_loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=False, **kwargs)
         else:
+            # train_loader = torch.utils.data.DataLoader(
+            #         datasets.CIFAR10(root, train=True, download=True,
+            #                  transform=TwoCropTransform(train_transform_supcon)),
+            #         batch_size=args.batch_size, shuffle=True, **kwargs)
             train_loader = torch.utils.data.DataLoader(
                     datasets.CIFAR10(root, train=True, download=True,
                              transform=TwoCropTransform(train_transform_supcon)),
-                    batch_size=args.batch_size, shuffle=True, **kwargs)
+                    batch_size=args.batch_size, shuffle=False, **kwargs)
+
         val_loader = torch.utils.data.DataLoader(
             datasets.CIFAR10(root, train=False, transform=transform_test),
             batch_size=args.batch_size, shuffle=False, **kwargs)

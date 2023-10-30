@@ -14,6 +14,8 @@ import torch.optim
 import torch.utils.data
 import numpy as np
 
+from pdb import set_trace as pb
+
 from utils import (CompLoss, DisLoss, DisLPLoss, SupConLoss, 
                 AverageMeter, adjust_learning_rate, warmup_learning_rate, 
                 set_loader_small, set_loader_ImageNet, set_model)
@@ -70,6 +72,8 @@ parser.set_defaults(bottleneck=True)
 parser.set_defaults(augment=True)
 
 args = parser.parse_args()
+# torch.set_default_dtype(torch.float64)
+
 
 state = {k: v for k, v in args._get_kwargs()}
 
@@ -236,6 +240,7 @@ def train_cider(args, train_loader, model, criterion_supcon, criterion_comp, cri
             supcon_losses.update(supcon_loss.data, input.size(0))
             loss = supcon_loss
 
+        pb()
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()

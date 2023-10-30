@@ -65,11 +65,21 @@ class Bottleneck(nn.Module):
         else:
             return out
 
+import numpy as np
+import random
 
 class ResNet(nn.Module):
     def __init__(self, block, num_blocks, in_channel=3, zero_init_residual=False):
         super(ResNet, self).__init__()
         self.in_planes = 64
+
+        init_seed = 1
+        if init_seed != -1:
+            torch.manual_seed(init_seed)
+            np.random.seed(init_seed)
+            random.seed(init_seed)
+            torch.cuda.manual_seed_all(init_seed)
+
 
         self.conv1 = nn.Conv2d(in_channel, 64, kernel_size=3, stride=1, padding=1,
                                bias=False)
