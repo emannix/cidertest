@@ -240,7 +240,7 @@ def train_cider(args, train_loader, model, criterion_supcon, criterion_comp, cri
             supcon_losses.update(supcon_loss.data, input.size(0))
             loss = supcon_loss
 
-        pb()
+        # pb()
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()

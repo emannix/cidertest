@@ -273,7 +273,6 @@ class DisLoss(nn.Module):
         logits = torch.div(
             torch.matmul(prototypes, prototypes.T),
             self.temperature)
-        pb()
 
         logits_mask = torch.scatter(
             torch.ones_like(mask),
