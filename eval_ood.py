@@ -13,6 +13,7 @@ from utils.detection_util import set_ood_loader_ImageNet, obtain_feature_from_lo
 from utils.util import set_loader_ImageNet, set_loader_small, set_model
 from utils.display_results import  plot_distribution, print_measures, save_as_dataframe
 
+from pdb import set_trace as pb
 
 def process_args():
     parser = argparse.ArgumentParser(description='Evaluates OOD Detector',formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -172,6 +173,7 @@ def main(args):
         out_datasets = ['SUN', 'places365', 'dtd', 'iNaturalist']
     else: 
         out_datasets = [ 'SVHN', 'places365', 'iSUN', 'dtd', 'LSUN']
+        out_datasets = ['dtd']
 
     auroc_list, aupr_list, fpr_list = [], [], []
     for out_dataset in out_datasets:

@@ -10,6 +10,8 @@ import torch.nn.functional as F
 from .display_results import print_measures_with_std
 from .svhn_loader import SVHN
 
+from pdb import set_trace as pb
+
 def set_ood_loader_small(args, out_dataset, img_size = 32):
     '''
         set OOD loader for CIFAR scale datasets
@@ -169,6 +171,7 @@ def get_and_print_results(args, in_score, out_score, auroc_list, aupr_list, fpr_
         measures = get_measures(out_score, in_score)
     else:
         measures = get_measures(-in_score, -out_score)
+    pb()
     aurocs.append(measures[0]); auprs.append(measures[1]); fprs.append(measures[2])
     print(f'in score samples (random sampled): {in_score[:3]}, out score samples: {out_score[:3]}')
     # print(f'in score samples (min): {in_score[-3:]}, out score samples: {out_score[-3:]}')
