@@ -257,8 +257,7 @@ class DisLoss(nn.Module):
         self.loader = loader
         self.init_class_prototypes()
 
-    def forward(self, features, labels):    
-
+    def forward(self, features, labels):
         prototypes = self.prototypes
         num_cls = self.args.n_cls
         for j in range(len(features)):
@@ -299,6 +298,7 @@ class DisLoss(nn.Module):
                 for j, feature in enumerate(features):
                     prototypes[target[j].item()] += feature
                     prototype_counts[target[j].item()] += 1
+                break
             for cls in range(self.args.n_cls):
                 prototypes[cls] /=  prototype_counts[cls] 
             # measure elapsed time
