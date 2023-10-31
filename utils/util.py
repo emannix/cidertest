@@ -13,6 +13,7 @@ from torchvision import datasets, transforms
 import torchvision.transforms as transforms
 
 import random
+from pdb import set_trace as pb
 
 class TwoCropTransform:
     """Create two crops of the same image"""
@@ -87,6 +88,7 @@ def warmup_learning_rate(args, epoch, batch_id, total_batches, optimizer):
         for param_group in optimizer.param_groups:
             param_group['lr'] = lr
             # param_group['lr'] = 0.1
+    # pb()
 
 
 def set_optimizer(opt, model):
