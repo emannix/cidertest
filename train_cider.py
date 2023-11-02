@@ -4,6 +4,7 @@ import os
 import time
 from datetime import datetime
 import logging
+import torch
 import tensorboard_logger as tb_logger
 import pprint
 
@@ -122,7 +123,6 @@ if args.in_dataset == "CIFAR-10":
 elif args.in_dataset in ["CIFAR-100", "ImageNet-100"]:
     args.n_cls = 100
 
-pb()
 #set seeds
 torch.manual_seed(args.seed)
 torch.cuda.manual_seed(args.seed)
@@ -248,6 +248,7 @@ def train_cider(args, train_loader, model, criterion_supcon, criterion_comp, cri
         batch_time.update(time.time() - end)
         end = time.time()
         if i % args.print_freq == 0: 
+            print(optimizer.param_groups[0]['lr'])
             if args.loss == 'cider':
                 log.debug('Epoch: [{0}][{1}/{2}]\t'
                     'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
