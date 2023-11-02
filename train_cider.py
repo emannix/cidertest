@@ -122,7 +122,7 @@ if args.in_dataset == "CIFAR-10":
 elif args.in_dataset in ["CIFAR-100", "ImageNet-100"]:
     args.n_cls = 100
 
-
+pb()
 #set seeds
 torch.manual_seed(args.seed)
 torch.cuda.manual_seed(args.seed)

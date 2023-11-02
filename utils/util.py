@@ -203,7 +203,7 @@ def set_model(args):
     # get the number of model parameters
     print('Number of model parameters: {}'.format(
         sum([p.data.nelement() for p in model.parameters()])))
-    torch.cuda.set_device(args.gpu) 
+    torch.cuda.set_device(args.gpu)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = True
     model = model.cuda()
