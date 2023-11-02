@@ -12,6 +12,8 @@ import torch.nn.functional as F
 from torchvision import datasets, transforms
 import torchvision.transforms as transforms
 
+from pdb import set_trace as pb
+
 class TwoCropTransform:
     """Create two crops of the same image"""
     def __init__(self, transform):
@@ -70,14 +72,17 @@ def adjust_learning_rate(args, optimizer, epoch):
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
 
+    # pb()
+
+
 def warmup_learning_rate(args, epoch, batch_id, total_batches, optimizer):
     if args.warm and epoch <= args.warm_epochs:
-        p = (batch_id + (epoch - 1) * total_batches) / \
-            (args.warm_epochs * total_batches)
+        p = (batch_id + (epoch - 1) * total_batches) / (args.warm_epochs * total_batches)
         lr = args.warmup_from + p * (args.warmup_to - args.warmup_from)
 
         for param_group in optimizer.param_groups:
             param_group['lr'] = lr
+    # pb()
 
 
 def set_optimizer(opt, model):

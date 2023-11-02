@@ -172,6 +172,7 @@ def main(args):
         out_datasets = ['SUN', 'places365', 'dtd', 'iNaturalist']
     else: 
         out_datasets = [ 'SVHN', 'places365', 'iSUN', 'dtd', 'LSUN']
+        out_datasets = ['dtd']
 
     auroc_list, aupr_list, fpr_list = [], [], []
     for out_dataset in out_datasets:

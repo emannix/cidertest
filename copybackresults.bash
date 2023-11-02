@@ -14,8 +14,6 @@ import torch.optim
 import torch.utils.data
 import numpy as np
 
-from pdb import set_trace as pb
-
 from utils import (CompLoss, DisLoss, DisLPLoss, SupConLoss, 
                 AverageMeter, adjust_learning_rate, warmup_learning_rate, 
                 set_loader_small, set_loader_ImageNet, set_model)
@@ -142,6 +140,7 @@ if args.warm:
     else:
         args.warmup_to = args.learning_rate
 
+
 def main():
     tb_log = tb_logger.Logger(logdir=args.tb_folder, flush_secs=2)
 
@@ -176,7 +175,6 @@ def main():
     for epoch in range(args.start_epoch, args.epochs):
         adjust_learning_rate(args, optimizer, epoch)
         # train for one epoch
-        print(optimizer.param_groups[0]['lr'])
         train_sloss, train_uloss, train_dloss = train_cider(args, train_loader, model, criterion_supcon, criterion_comp, criterion_dis, optimizer, epoch, log)
         if args.loss == 'supcon':
             tb_log.log_value('train_sup_loss', train_sloss, epoch)
@@ -185,7 +183,6 @@ def main():
             tb_log.log_value('train_dis_loss', train_dloss, epoch)
         # tensorboard logger
         tb_log.log_value('learning_rate', optimizer.param_groups[0]['lr'], epoch)
-        print(optimizer.param_groups[0]['lr'])
         # save checkpoint
         if (epoch + 1) % args.save_epoch == 0: 
             if args.loss == 'supcon':
@@ -239,7 +236,6 @@ def train_cider(args, train_loader, model, criterion_supcon, criterion_comp, cri
             supcon_losses.update(supcon_loss.data, input.size(0))
             loss = supcon_loss
 
-        # print(optimizer.param_groups[0]['lr'])
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
