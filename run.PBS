@@ -47,13 +47,13 @@ python train_cider.py \
     --gpu 0 \
     --model resnet18 \
     --loss cider \
-    --epochs 20 \
+    --epochs 500 \
     --proto_m 0.95 \
     --feat_dim 128 \
     --batch-size 512 \
     --w 2 \
     --cosine \
-    --save-epoch 10
+    --save-epoch 100
 
 
 ##Log this job's resource usage stats###
