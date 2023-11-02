@@ -5,7 +5,7 @@ torchvision==0.14.1+cu117
 
 faiss-gpu==1.7.2
 
-tensorflow
+tensorflow-cpu
 tensorboard_logger
 hydra-core
 hydra-colorlog
