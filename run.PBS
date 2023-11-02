@@ -16,6 +16,14 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=nathaniel.bloomfield@unimelb.edu.au
 
+# sinteractive --account=punim0980 --time=360 --ntasks=1 --mem=112gb --cpus-per-task 8 -p gpu-a100 --gres=gpu:1
+
+# module load Python/3.10.4
+# module load CUDA/11.7.0
+# virtualenv /data/cephfs/punim0980/venvs/ood_test
+# source /data/cephfs/punim0980/venvs/ood_test/bin/activate
+# PIP_CACHE_DIR=/data/cephfs/punim0980/venvs/cache pip3 install -r requirements.txt
+
 module purge
 export mysystem=spartan
 export env_seed=$SLURM_ARRAY_TASK_ID
@@ -27,11 +35,11 @@ export LOCAL_RANK=0
 export MASTER_ADDR='127.0.0.1'
 export MASTER_PORT='29500'
 
-module load python/3.8.6
-module load cuda/11.7.0
-source ~/venvs/mysemiv2/bin/activate
+module load Python/3.10.4
+module load CUDA/11.7.0
+source /data/cephfs/punim0980/venvs/ood_test/bin/activate
 
-cd /data/cephfs/punim0980/cider/
+cd /data/cephfs/punim0980/tests/cider/
 
 python train_cider.py \
     --in-dataset CIFAR-10 \
