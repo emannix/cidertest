@@ -24,7 +24,7 @@
 # source /data/cephfs/punim0980/venvs/ood_test/bin/activate
 # PIP_CACHE_DIR=/data/cephfs/punim0980/venvs/cache pip3 install -r requirements.txt
 
-module purge
+# module purge
 export mysystem=spartan
 export env_seed=$SLURM_ARRAY_TASK_ID
 export HYDRA_FULL_ERROR=1
