@@ -5,7 +5,7 @@ OOD_LOC=datasets/small_OOD_dataset
 
 
 python eval_ood.py \
-        --epoch 20 \
+        --epoch 500 \
         --model resnet18 \
         --head mlp \
         --gpu 0 \
@@ -14,7 +14,7 @@ python eval_ood.py \
         --in_dataset ${ID_DATASET} \
         --id_loc ${ID_LOC} \
         --ood_loc ${OOD_LOC} \
-        --name 01_11_10:10_cider_resnet18_lr_0.5_cosine_True_bsz_512_cider_wd_2.0_20_128_trial_0_temp_0.1_CIFAR-10_pm_0.95
+        --name 02_11_19:06_cider_resnet18_lr_0.5_cosine_True_bsz_512_cider_wd_2.0_500_128_trial_0_temp_0.1_CIFAR-10_pm_0.95
 
 
 # python eval_ood.py \
